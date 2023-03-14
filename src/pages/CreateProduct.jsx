@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API, graphqlOperation, Storage } from "aws-amplify";
 import { createProducto } from "../graphql/mutations";
-import { listProductos } from "../graphql/queries";
 import "@aws-amplify/ui-react/styles.css";
 
 
@@ -46,15 +45,6 @@ const CreateProduct = () => {
     const file = e.target.files[0];
     setFileName(file);
   };
-
-//   useEffect(() => {
-//     const fetchProducts = async () => {
-//       const result = await API.graphql(graphqlOperation(listProductos));
-//       setNewProduct(result.data.listProductos.items);
-//     };
-//     fetchProducts();
-//   }, []);
-
   return (
     <>
       <div className="flex items-center justify-center">

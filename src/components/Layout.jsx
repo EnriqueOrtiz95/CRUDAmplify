@@ -3,7 +3,6 @@ import { Outlet, Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const Layout = ({ signOut, user }) => {
-  console.log(user);
   const { pathname } = useLocation();
   return (
     <div className="flex h-screen flex-col lg:flex-row">
