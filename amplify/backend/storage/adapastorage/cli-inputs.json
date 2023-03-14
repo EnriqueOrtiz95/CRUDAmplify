@@ -1,0 +1,17 @@
+{
+  "resourceName": "adapastorage",
+  "policyUUID": "dec34354",
+  "bucketName": "adapabucket",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

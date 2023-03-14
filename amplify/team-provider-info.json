@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-adapaamplifytest-dev-124012-authRole",
+      "UnauthRoleArn": "arn:aws:iam::395888986957:role/amplify-adapaamplifytest-dev-124012-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::395888986957:role/amplify-adapaamplifytest-dev-124012-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-adapaamplifytest-dev-124012-deployment",
+      "UnauthRoleName": "amplify-adapaamplifytest-dev-124012-unauthRole",
+      "StackName": "amplify-adapaamplifytest-dev-124012",
+      "StackId": "arn:aws:cloudformation:us-east-1:395888986957:stack/amplify-adapaamplifytest-dev-124012/e030f3a0-c1d6-11ed-9a53-0ab4ae46a93f",
+      "AmplifyAppId": "d1bgyjmn6vriu9"
+    },
+    "categories": {
+      "auth": {
+        "adapaamplifytestbde28d54": {}
+      },
+      "api": {
+        "adapaamplifytest": {}
+      },
+      "storage": {
+        "adapastorage": {}
+      }
+    }
+  }
+}
