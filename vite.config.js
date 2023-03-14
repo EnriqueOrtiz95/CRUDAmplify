@@ -7,6 +7,11 @@ export default defineConfig({
   resolve: {
     alias: {
       './runtimeConfig': './runtimeConfig.browser',
+      "~": path.resolve(__dirname, "node_modules"),
+      "@": path.resolve(__dirname, "src"),
     },
-}
+  },
+  build: {
+    chunkSizeWarningLimit: 2000,
+  },
 })
