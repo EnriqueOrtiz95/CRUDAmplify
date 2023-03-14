@@ -11,12 +11,12 @@ const UpdateProduct = () => {
   const [updateProduct, setUpdateProduct] = useState({
     id,
     product: "",
-    price: "",
+    price: 0,
     class: "",
     key: "",
     group: "",
     subGroup: "",
-    commission: "",
+    commission: 0,
     unit: "",
   });
   const [fileName, setFileName] = useState("");
@@ -24,15 +24,34 @@ const UpdateProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("aqui ando");
     const result = await API.graphql(
-      graphqlOperation(updateProducto, { input: updateProduct })
+      graphqlOperation(updateProducto, {
+        input: {
+          id: updateProduct.id,
+          product: updateProduct.product,
+          price: updateProduct.price,
+          class: updateProduct.class,
+          key: updateProduct.key,
+          group: updateProduct.group,
+          subGroup: updateProduct.subGroup,
+          commission: updateProduct.commission,
+          unit: updateProduct.unit,
+        },
+      })
     );
     setUpdateProduct(result.data.updateProducto);
     try {
-      await Storage.put(fileName.name, fileName, {
-        contentType: fileName.type,
-      });
-      navigate("/");
+      await Storage.put(
+        `${result.data.updateProducto.id}/${fileName.name}`,
+        fileName,
+        {
+          contentType: fileName.type,
+        }
+      );
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +92,7 @@ const UpdateProduct = () => {
             className="p-2 border-violet-300 border-2"
             defaultValue={updateProduct.product}
             onChange={(e) =>
-              setNewProduct({ ...newProduct, product: e.target.value })
+              setUpdateProduct({ ...updateProduct, product: e.target.value })
             }
           />
           <input
@@ -83,7 +102,7 @@ const UpdateProduct = () => {
             className="p-2 border-violet-300 border-2"
             defaultValue={updateProduct.price}
             onChange={(e) =>
-              setNewProduct({ ...newProduct, price: e.target.value })
+              setUpdateProduct({ ...updateProduct, price: e.target.value })
             }
           />
           <input
@@ -93,7 +112,7 @@ const UpdateProduct = () => {
             className="p-2 border-violet-300 border-2"
             defaultValue={updateProduct.class}
             onChange={(e) =>
-              setNewProduct({ ...newProduct, class: e.target.value })
+              setUpdateProduct({ ...updateProduct, class: e.target.value })
             }
           />
           <input
@@ -103,7 +122,7 @@ const UpdateProduct = () => {
             className="p-2 border-violet-300 border-2"
             defaultValue={updateProduct.key}
             onChange={(e) =>
-              setNewProduct({ ...newProduct, key: e.target.value })
+              setUpdateProduct({ ...updateProduct, key: e.target.value })
             }
           />
           <input
@@ -113,7 +132,7 @@ const UpdateProduct = () => {
             className="p-2 border-violet-300 border-2"
             defaultValue={updateProduct.group}
             onChange={(e) =>
-              setNewProduct({ ...newProduct, group: e.target.value })
+              setUpdateProduct({ ...updateProduct, group: e.target.value })
             }
           />
           <input
@@ -123,7 +142,7 @@ const UpdateProduct = () => {
             className="p-2 border-violet-300 border-2"
             defaultValue={updateProduct.subGroup}
             onChange={(e) =>
-              setNewProduct({ ...newProduct, subGroup: e.target.value })
+              setUpdateProduct({ ...updateProduct, subGroup: e.target.value })
             }
           />
           <input
@@ -133,7 +152,7 @@ const UpdateProduct = () => {
             className="p-2 border-violet-300 border-2"
             defaultValue={updateProduct.commission}
             onChange={(e) =>
-              setNewProduct({ ...newProduct, commission: e.target.value })
+              setUpdateProduct({ ...updateProduct, commission: e.target.value })
             }
           />
           <input
@@ -143,7 +162,7 @@ const UpdateProduct = () => {
             className="p-2 border-violet-300 border-2"
             defaultValue={updateProduct.unit}
             onChange={(e) =>
-              setNewProduct({ ...newProduct, unit: e.target.value })
+              setUpdateProduct({ ...updateProduct, unit: e.target.value })
             }
           />
           <button type="submit" className="register-btn">

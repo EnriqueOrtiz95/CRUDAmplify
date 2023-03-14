@@ -29,52 +29,67 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 p-4 text-lg">
-      {product.map((prod) => {
-        const {
-          id,
-          product,
-          price,
-          class: clase,
-          key,
-          group,
-          subGroup,
-          commission,
-          unit,
-        } = prod;
-        return (
-          <div
-            className="flex justify-between items-center border-2 border-gray-300 p-4 rounded-md shadow-lg"
-            key={id}
-          >
-            <div className="flex gap-2 text-[.9rem]">
-              <p className="text-gray-500">{id}</p>
-              <p className="text-gray-500">{product}</p>
-              <p className="text-gray-500">{price}</p>
-              <p className="text-gray-500">{clase}</p>
-              <p className="text-gray-500">{key}</p>
-              <p className="text-gray-500">{group}</p>
-              <p className="text-gray-500">{subGroup}</p>
-              <p className="text-gray-500">{commission}</p>
-              <p className="text-gray-500">{unit}</p>
-            </div>
-            <div className="flex gap-4 text-[.9rem]">
-              <Link
-                to={`/update/${id}`}
-                className="text-white bg-blue-900 p-2 rounded-md"
-              >
-                Update
-              </Link>
-              <button
-                className="text-white bg-red-700 p-2 rounded-md"
-                onClick={() => removeProduct(id)}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        );
-      })}
+    <div className="flex flex-col gap-4 p-4 text-lg flex-wrap">
+      <table>
+        <thead className="bg-cyan-900 p-10 text-white">
+          <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th className="hidden lg:table-cell">Price</th>
+            <th className="hidden lg:table-cell">Class</th>
+            <th className="hidden lg:table-cell">Key</th>
+            <th className="hidden lg:table-cell">Group</th>
+            <th className="hidden lg:table-cell">Subgroup</th>
+            <th className="hidden lg:table-cell">Commission</th>
+            <th className="hidden lg:table-cell">Unit</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {product.map((prod) => {
+            const {
+              id,
+              product,
+              price,
+              class: clase,
+              key,
+              group,
+              subGroup,
+              commission,
+              unit,
+            } = prod;
+            return (
+              <tr key={id}>
+                <td>{id.substring(0, 10)}</td>
+                <td>{product.substring(0, 10)}</td>
+                <td className="hidden lg:table-cell">{price}</td>
+                <td className="hidden lg:table-cell">{clase.substring(0, 10)}</td>
+                <td className="hidden lg:table-cell">{key.substring(0, 10)}</td>
+                <td className="hidden lg:table-cell">{group.substring(0, 10)}</td>
+                <td className="hidden lg:table-cell">{subGroup.substring(0, 10)}</td>
+                <td className="hidden lg:table-cell">{commission}</td>
+                <td className="hidden lg:table-cell">{unit.substring(0, 10)}</td>
+                <td>
+                  <div className="flex gap-4 text-[.9rem]">
+                    <Link
+                      to={`/update/${id}`}
+                      className="text-white bg-blue-900 p-2 rounded-md"
+                    >
+                      Update
+                    </Link>
+                    <button
+                      className="text-white bg-red-700 p-2 rounded-md"
+                      onClick={() => removeProduct(id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

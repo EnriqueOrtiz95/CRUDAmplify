@@ -14,7 +14,7 @@ const App = ({ signOut, user }) => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout signOut={signOut} />}>
+        <Route path="/" element={<Layout signOut={signOut} user={user} />}>
           <Route index path="/" element={<Home />} />
           <Route path="/create" element={<CreateProduct />} />
           <Route path="/update/:id" element={<UpdateProduct />} />
