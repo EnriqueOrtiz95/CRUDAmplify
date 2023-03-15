@@ -5,21 +5,24 @@ import { updateProducto } from "../graphql/mutations";
 import { getProducto } from "../graphql/queries";
 import "@aws-amplify/ui-react/styles.css";
 
+import { BsUpload } from "react-icons/bs";
+
 const UpdateProduct = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [updateProduct, setUpdateProduct] = useState({
     id,
     product: "",
-    price: 0,
+    price: "",
     class: "",
     key: "",
     group: "",
     subGroup: "",
-    commission: 0,
+    commission: "",
     unit: "",
   });
   const [fileName, setFileName] = useState("");
+  const [image, setImage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,6 +62,7 @@ const UpdateProduct = () => {
 
   const handleFile = (e) => {
     const file = e.target.files[0];
+    setImage(URL.createObjectURL(file));
     setFileName(file);
   };
 
@@ -68,7 +72,15 @@ const UpdateProduct = () => {
       console.log("result is", result.data.getProducto);
       setUpdateProduct(result.data.getProducto);
     };
+    const fetchFile = async () => {
+      const result = await Storage.get(`${id}/${fileName.name}`, {
+        contentType: fileName.type,
+      });
+      console.log("result is", result);
+      setFileName(result);
+    };
     fetchProducts();
+    fetchFile();
   }, []);
 
   return (
@@ -82,14 +94,29 @@ const UpdateProduct = () => {
             type="file"
             name="photo"
             accept="image/*"
+            className="hidden"
             id="photo"
             onChange={(e) => handleFile(e)}
           />
+          <div className="mx-auto">
+            <label
+              htmlFor="photo"
+              className="flex items-center justify-center w-[100px] h-[100px] text-white cursor-pointer bg-gray-form4 borderUpload"
+            >
+              {image ? (
+                <img src={image} alt={fileName} width={100} height={200} />
+              ) : (
+                <div>
+                  <BsUpload className="text-primary text-[3rem] hover:text-gray-BA hover:text-sky-700" />
+                </div>
+              )}
+            </label>
+          </div>
           <input
             type="text"
             name="product"
             placeholder="Nombre de producto"
-            className="p-2 border-violet-300 border-2"
+            className="p-2 border-primary border-2"
             defaultValue={updateProduct.product}
             onChange={(e) =>
               setUpdateProduct({ ...updateProduct, product: e.target.value })
@@ -99,7 +126,7 @@ const UpdateProduct = () => {
             type="number"
             name="price"
             placeholder="Precio de producto"
-            className="p-2 border-violet-300 border-2"
+            className="p-2 border-primary border-2"
             defaultValue={updateProduct.price}
             onChange={(e) =>
               setUpdateProduct({ ...updateProduct, price: e.target.value })
@@ -109,7 +136,7 @@ const UpdateProduct = () => {
             type="text"
             name="class"
             placeholder="Clase de producto"
-            className="p-2 border-violet-300 border-2"
+            className="p-2 border-primary border-2"
             defaultValue={updateProduct.class}
             onChange={(e) =>
               setUpdateProduct({ ...updateProduct, class: e.target.value })
@@ -119,7 +146,7 @@ const UpdateProduct = () => {
             type="text"
             name="key"
             placeholder="Llave de producto"
-            className="p-2 border-violet-300 border-2"
+            className="p-2 border-primary border-2"
             defaultValue={updateProduct.key}
             onChange={(e) =>
               setUpdateProduct({ ...updateProduct, key: e.target.value })
@@ -129,7 +156,7 @@ const UpdateProduct = () => {
             type="text"
             name="group"
             placeholder="Grupo de producto"
-            className="p-2 border-violet-300 border-2"
+            className="p-2 border-primary border-2"
             defaultValue={updateProduct.group}
             onChange={(e) =>
               setUpdateProduct({ ...updateProduct, group: e.target.value })
@@ -139,7 +166,7 @@ const UpdateProduct = () => {
             type="text"
             name="subGroup"
             placeholder="Subgrupo de producto"
-            className="p-2 border-violet-300 border-2"
+            className="p-2 border-primary border-2"
             defaultValue={updateProduct.subGroup}
             onChange={(e) =>
               setUpdateProduct({ ...updateProduct, subGroup: e.target.value })
@@ -149,7 +176,7 @@ const UpdateProduct = () => {
             type="number"
             name="commission"
             placeholder="Comisión de producto"
-            className="p-2 border-violet-300 border-2"
+            className="p-2 border-primary border-2"
             defaultValue={updateProduct.commission}
             onChange={(e) =>
               setUpdateProduct({ ...updateProduct, commission: e.target.value })
@@ -159,7 +186,7 @@ const UpdateProduct = () => {
             type="text"
             name="unit"
             placeholder="Unidad de producto"
-            className="p-2 border-violet-300 border-2"
+            className="p-2 border-primary border-2"
             defaultValue={updateProduct.unit}
             onChange={(e) =>
               setUpdateProduct({ ...updateProduct, unit: e.target.value })

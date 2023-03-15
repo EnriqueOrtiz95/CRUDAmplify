@@ -19,16 +19,15 @@ html {
 }
 
 body{
-    background-color: #d9d9d9;
     min-height: 100vh;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     color: #233540;
 }
 
 .register-btn{
   display: block;
-  background: #5A6298;
+  background: #3ea2f7;
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -42,5 +41,64 @@ body{
 }
 
 .register-btn:hover{
-  background: #4a4f7a;
+  background: rgb(3 105 161)
+}
+
+/******** JAEL STYLES ************/
+
+.mainContainer {
+  display: flex;
+}
+
+.borderLogo{
+  border: 3px solid #3ea2f7;
+  border-radius: 9px;
+}
+
+.borderUpload{
+  border: 3px dashed #3ea2f7;
+  border-radius: 9px;
+}
+
+.container {
+  display: flex;
+  width: 260px;
+  flex-direction: column;
+  background: #eef7ff;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.boxLogo {
+  margin-top: 30px;
+  margin-left: 10px;
+  box-sizing: border-box;
+  border: 3px solid #3ea2f7;
+  width: 80px;
+  height: 80px;
+  border-radius: 9px;
+}
+
+.logo {
+  color: #3ea2f7;
+  text-align: center;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+}
+
+.containerbttn {
+  display: flex;
+  flex-direction: column;
+}
+
+.navList {
+  margin-left: 125px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  color: #3ea2f7;
 }

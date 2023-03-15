@@ -11,8 +11,9 @@ const Home = () => {
 
   const removeProduct = async (id) => {
     try {
-      if (confirm("You sure to delete this product?")) {
+      if (confirm("¿Seguro que quieres eliminar este producto?")) {
         await API.graphql(graphqlOperation(deleteProducto, { input: { id } }));
+        setProduct(product.filter((prod) => prod.id !== id));
       }
     } catch (error) {
       console.log(error);
@@ -25,26 +26,27 @@ const Home = () => {
       setProduct(result.data.listProductos.items);
     };
     fetchProducts();
-    console.log(product);
+    // console.log(product);
   }, []);
 
   return (
     <div className="flex flex-col gap-4 p-4 text-lg flex-wrap">
+      <h1 className="text-[2rem] text-primary font-bold mb-6">Catalogo General</h1>
       <table>
-        <thead className="bg-cyan-900 p-10 text-white">
+        <thead className="bg-primary p-10 text-white">
           <tr>
             <th>ID</th>
-            <th>Product</th>
-            <th className="hidden lg:table-cell">Price</th>
-            <th className="hidden lg:table-cell">Class</th>
-            <th className="hidden lg:table-cell">Key</th>
-            <th className="hidden lg:table-cell">Group</th>
-            <th className="hidden lg:table-cell">Subgroup</th>
-            <th className="hidden lg:table-cell">Commission</th>
-            <th className="hidden lg:table-cell">Unit</th>
-            <th>Action</th>
+            <th>Producto</th>
+            <th className="hidden lg:table-cell">Precio</th>
+            <th className="hidden lg:table-cell">Clase</th>
+            <th className="hidden lg:table-cell">Llave</th>
+            <th className="hidden lg:table-cell">Grupo</th>
+            <th className="hidden lg:table-cell">Subgrupo</th>
+            <th className="hidden lg:table-cell">Comisión</th>
+            <th className="hidden lg:table-cell">Unidad</th>
           </tr>
         </thead>
+        <div className="my-4"></div>
         <tbody>
           {product.map((prod) => {
             const {
@@ -59,9 +61,9 @@ const Home = () => {
               unit,
             } = prod;
             return (
-              <tr key={id}>
-                <td>{id.substring(0, 10)}</td>
-                <td>{product.substring(0, 10)}</td>
+              <tr key={id} className='text-center'>
+                <td>{id.substring(0, 5)}</td>
+                <td>{product}</td>
                 <td className="hidden lg:table-cell">{price}</td>
                 <td className="hidden lg:table-cell">{clase.substring(0, 10)}</td>
                 <td className="hidden lg:table-cell">{key.substring(0, 10)}</td>
@@ -73,15 +75,15 @@ const Home = () => {
                   <div className="flex gap-4 text-[.9rem]">
                     <Link
                       to={`/update/${id}`}
-                      className="text-white bg-blue-900 p-2 rounded-md"
+                      className="text-white bg-primary hover:bg-sky-700 p-2 rounded-md"
                     >
-                      Update
+                      Actualizar
                     </Link>
                     <button
-                      className="text-white bg-red-700 p-2 rounded-md"
+                      className="text-white bg-red-600 hover:bg-red-800 p-2 rounded-md"
                       onClick={() => removeProduct(id)}
                     >
-                      Delete
+                      Eliminar
                     </button>
                   </div>
                 </td>
