@@ -4,14 +4,15 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    input: {
+      app: './index.html', // default
+    },
+    chunkSizeWarningLimit: 1600,
+  },
   resolve: {
     alias: {
       './runtimeConfig': './runtimeConfig.browser',
-      "~": path.resolve(__dirname, "node_modules"),
-      "@": path.resolve(__dirname, "src"),
-    },
-  },
-  build: {
-    chunkSizeWarningLimit: 2000,
-  },
+    }
+  }
 })

@@ -8,15 +8,15 @@ const Home = lazy(() => import("./pages/Home"));
 const UpdateProduct = lazy(() => import("./pages/UpdateProduct"));
 const CreateProduct = lazy(() => import("./pages/CreateProduct"));
 
-import { withAuthenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
+// import { withAuthenticator } from "@aws-amplify/ui-react";
+// import "@aws-amplify/ui-react/styles.css";
 
-const App = ({ signOut, user }) => {
+const App = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Router>
         <Routes>
-          <Route path="/" element={<Layout signOut={signOut} user={user} />}>
+          <Route path="/" element={<Layout />}>
             <Route index path="/" element={<Home />} />
             <Route path="/create" element={<CreateProduct />} />
             <Route path="/update/:id" element={<UpdateProduct />} />
@@ -27,4 +27,4 @@ const App = ({ signOut, user }) => {
   );
 };
 
-export default withAuthenticator(App);
+export default App;
